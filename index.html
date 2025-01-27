@@ -207,10 +207,10 @@
     </footer>
     <!-- Carrello Sidebar -->
     <div class="fixed inset-0 overflow-hidden z-50" 
-         x-show="$store.cart.isOpen" 
-         x-transition:enter="transition ease-in-out duration-500"
-         x-transition:leave="transition ease-in-out duration-500"
-         x-cloak>
+    x-show="$store.cart.isOpen" 
+    x-transition:enter="transition ease-in-out duration-300"
+    x-transition:leave="transition ease-in-out duration-300"
+    x-cloak>
         <div class="absolute inset-0 bg-black/50 transition-opacity" 
              @click="$store.cart.toggleCart()"></div>
 
@@ -349,7 +349,9 @@
                 isOpen: false,
                 items: [],
                 total: 0,
-
+                toggleCart() {
+                    this.isOpen = !this.isOpen
+                },
                 init() {
                     this.loadCart()
                 },
@@ -367,6 +369,7 @@
 
                 removeItem(item) {
                     this.items = this.items.filter(i => i.id !== item.id)
+                    this.isOpen = true
                     this.updateTotal()
                     this.showToast(`${item.name} rimosso`)
                 },
